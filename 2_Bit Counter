@@ -1,0 +1,26 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity two_bit_counter is
+    Port ( clock : in STD_LOGIC;
+           reset : in STD_LOGIC;
+           cnt_out : BUFFER STD_LOGIC_VECTOR (1 downto 0));
+end two_bit_counter;
+
+architecture Behavioral of two_bit_counter is
+
+
+begin
+
+    process(clock, reset, cnt_out)
+    begin
+        if (reset = '1') then
+            cnt_out <= "00";
+        elsif rising_edge(clock) then
+            cnt_out <= cnt_out + '1';
+        end if;
+    end process;
+    
+
+end Behavioral;
