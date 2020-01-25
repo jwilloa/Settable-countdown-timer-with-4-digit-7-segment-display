@@ -1,0 +1,27 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+ 
+entity mux_4to1 is
+ port(
+     A,B,C,D : in STD_LOGIC_VECTOR(6 downto 0);
+     X: in STD_LOGIC_VECTOR(1 downto 0);
+     Z: out STD_LOGIC_VECTOR(6 downto 0)
+  );
+end mux_4to1;
+ 
+architecture bhv of mux_4to1 is
+begin
+
+process (X ,A, B, C, D)
+
+begin
+
+    case X is
+        when "00" => Z <= A;
+        when "01" => Z <= B;
+        when "10" => Z <= C;
+        when "11" => Z <= D;    
+    end case;
+ 
+end process;
+end bhv;
