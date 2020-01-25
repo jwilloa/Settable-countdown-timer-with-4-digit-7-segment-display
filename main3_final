@@ -1,0 +1,107 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 24.01.2020 13:40:35
+-- Design Name: 
+-- Module Name: driver - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity driver is
+    Port ( sw  : in   STD_LOGIC_VECTOR(15 downto 0);
+           clk : in   STD_LOGIC; 
+           an  : out  STD_LOGIC_VECTOR(3 downto 0);
+           dp  : out  STD_LOGIC;
+           seg : out  STD_LOGIC_VECTOR(6 downto 0));
+end driver;
+
+architecture Behavioral of driver is
+
+COMPONENT mux_4to1 is
+    port(
+    A,B,C,D : in  STD_LOGIC_VECTOR(6 downto 0);
+    X       : in  STD_LOGIC_VECTOR(1 downto 0);
+    Z       : out STD_LOGIC_VECTOR(6 downto 0));
+END COMPONENT mux_4to1;
+
+COMPONENT bcd_7segment is
+    Port ( BCDin    : in  STD_LOGIC_VECTOR (3 downto 0);
+    Seven_Segment   : out STD_LOGIC_VECTOR (6 downto 0));
+END COMPONENT bcd_7segment;
+
+COMPONENT Clock_Divider is
+    port ( 
+    clk_in, reset   : in  std_logic;
+    clock_out       : out std_logic);
+END COMPONENT Clock_Divider;
+
+COMPONENT two_bit_counter is
+    Port ( clock    : in     STD_LOGIC;
+           reset    : in     STD_LOGIC;
+           cnt_out  : BUFFER STD_LOGIC_VECTOR (1 downto 0));
+END COMPONENT two_bit_counter;
+
+SIGNAL S0, S1, S2, S3 : STD_LOGIC_VECTOR(6 downto 0);
+SIGNAL S4, S5         : STD_LOGIC;
+SIGNAL S6             : STD_LOGIC_VECTOR(1 downto 0);
+
+begin
+    
+    with S6 select
+    dp <=   '0' when "10",
+            '1' when others; 
+    
+    -- Select which segment display to use from 2_Bit counter output
+    with S6 select 
+    an <=   "1110" when "00", -- 1st segment
+            "1101" when "01", -- 2nd segment
+            "1011" when "10", -- 3rd segment
+            "0111" when "11"; -- 4th segment
+
+    -- Switches select from 0 - 15
+    DECODER0 : bcd_7segment
+    PORT MAP (BCDin(0) => sw(0), BCDin(1) => sw(1), BCDin(2) => sw(2), BCDin(3) => sw(3), Seven_Segment => S0);
+    DECODER1 : bcd_7segment
+    PORT MAP (BCDin(0) => sw(4), BCDin(1) => sw(5), BCDin(2) => sw(6), BCDin(3) => sw(7), Seven_Segment => S1);
+    DECODER2 : bcd_7segment
+    PORT MAP (BCDin(0) => sw(8), BCDin(1) => sw(9), BCDin(2) => sw(10), BCDin(3) => sw(11), Seven_Segment => S2);
+    DECODER3 : bcd_7segment
+    PORT MAP (BCDin(0) => sw(12), BCDin(1) => sw(13), BCDin(2) => sw(14), BCDin(3) => sw(15), Seven_Segment => S3);
+    
+    -- Select through 4_Bit decoders and output to segment  
+    MUX : mux_4to1
+    PORT MAP (A => S0, B => S1, C => S2, D => S3, X => S6, z => seg);  
+  
+    -- Clock divider from 100MHz to 1Hz
+    CLK_DIV : Clock_Divider
+    PORT MAP (clk_in => clk, reset => '0', clock_out => S4);
+
+    -- Counter to select through multiplexer
+    TWO_BIT : two_bit_counter
+    PORT MAP (clock => S4, reset => '0', cnt_out => S6);    
+
+end Behavioral;
