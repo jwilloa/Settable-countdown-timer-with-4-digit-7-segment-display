@@ -1,30 +1,52 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 27.01.2020 13:58:11
+-- Design Name: 
+-- Module Name: clock_divider - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.numeric_std.ALL;
-  
-entity Clock_Divider is
-    port ( clk_in, reset: in std_logic;
-           clock_out: out std_logic);
-end Clock_Divider;
-  
-architecture bhv of Clock_Divider is
-  
-signal count: integer:=0;
-signal tmp : std_logic:='0';
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity clock_divider is
+    GENERIC (count_end  : NATURAL := 208334); -- Default count_end is 208334
+    port (clk_in, reset : in std_logic;
+          clock_out     : out std_logic);
+end clock_divider;
+
+architecture Behavioral of clock_divider is
+
+signal count : integer   :=  0;
+signal tmp   : std_logic := '0';
   
 begin
   
     process(clk_in)
     begin
-        if rising_edge(clk_in) then
-            count <= count + 1;
-            if (count = 208334) then        
+        if rising_edge(clk_in) then -- Wait till rising edge
+            count <= count + 1;     -- Increment counter by 1
+            if (count = count_end) then   -- Once count = 208334 then invert the signal     
                 tmp <= NOT tmp;
-                count <= 0;
+                count <= 0;  -- And set count back to 0
             end if;
         end if;
        end process;
         
-       clock_out <= tmp;
+       clock_out <= tmp; -- Send tmp signal to clock_out
   
-end bhv;
+end Behavioral;
