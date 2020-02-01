@@ -19,26 +19,28 @@
 ----------------------------------------------------------------------------------
 
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity clock_divider is
-    GENERIC (count_end  : NATURAL := 208334); -- Default count_end is 208334
-    port (clk_in, reset : in std_logic;
-          clock_out     : out std_logic);
-end clock_divider;
+ENTITY clock_divider is
+    GENERIC (count_end  :     NATURAL := 208334); -- Default count_end is 208334
+    
+    PORT (clk_in        : in  STD_LOGIC; --reset
+          clock_out     : out STD_LOGIC
+         );
+END clock_divider;
 
-architecture Behavioral of clock_divider is
+ARCHITECTURE Behavioral of clock_divider is
 
-signal count : integer   :=  0;
-signal tmp   : std_logic := '0';
+SIGNAL count : INTEGER   :=   0;
+SIGNAL tmp   : STD_LOGIC := '0';
   
 begin
   
     process(clk_in)
     begin
-        if rising_edge(clk_in) then -- Wait till rising edge
+        if RISING_EDGE(clk_in) then -- Wait till rising edge
             count <= count + 1;     -- Increment counter by 1
             if (count = count_end) then   -- Once count = 208334 then invert the signal     
                 tmp <= NOT tmp;
@@ -49,4 +51,4 @@ begin
         
        clock_out <= tmp; -- Send tmp signal to clock_out
   
-end Behavioral;
+END Behavioral;
