@@ -19,28 +19,28 @@
 ----------------------------------------------------------------------------------
 
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity four_digits is
-  Port (   
+ENTITY four_digits is
+  PORT (   
          D0  : in STD_LOGIC_VECTOR (3 downto 0); 
          D1  : in STD_LOGIC_VECTOR (3 downto 0);
          D2  : in STD_LOGIC_VECTOR (3 downto 0);
          D3  : in STD_LOGIC_VECTOR (3 downto 0);
          --sw  : in STD_LOGIC_VECTOR (15 downto 0);
-         ck  : in STD_LOGIC; 
+         ck  : in  STD_LOGIC; 
          seg : out STD_LOGIC_VECTOR (6 downto 0);
          an  : out STD_LOGIC_VECTOR (3 downto 0);
          dp  : out STD_LOGIC
          );
-end four_digits;
+END four_digits;
 
-architecture Behavioral of four_digits is
+ARCHITECTURE Behavioral of four_digits is
 
-signal clock_line : STD_LOGIC_VECTOR(1 downto 0);
-signal D_Mux      : STD_LOGIC_VECTOR(3 downto 0); --signal D_Mux : STD_LOGIC_VECTOR(3 downto 0);
+SIGNAL clock_line : STD_LOGIC_VECTOR(1 downto 0);
+SIGNAL D_Mux      : STD_LOGIC_VECTOR(3 downto 0); --signal D_Mux : STD_LOGIC_VECTOR(3 downto 0);
 
 begin
 
@@ -49,18 +49,18 @@ begin
             '1' when others; 
 
     -- Instantiating two_bit_Counter, anode_decoder, multiplexer & BCD_decoder
-    two_bit_counter: entity work.two_bit_counter(Behavioral)
-    port map(clock => ck, reset => '0', cnt_out => clock_line); 
+    two_bit_counter: ENTITY work.two_bit_counter(Behavioral)
+    PORT MAP(clock => ck, reset => '0', cnt_out => clock_line); 
     
-    anode_decoder: entity work.display_anode_select(Behavioral)
-    port map(counter => clock_line, anode => an);
+    anode_decoder: ENTITY work.display_anode_select(Behavioral)
+    PORT MAP(counter => clock_line, anode => an);
     
-    multiplexer: entity work.four_to_one_multiplexer(Behavioral)
-    port map(X => clock_line, A => D0, B => D1, C => D2, D => D3, Z => D_Mux); --X => clock_line
+    multiplexer: ENTITY work.four_to_one_multiplexer(Behavioral)
+    PORT MAP(X => clock_line, A => D0, B => D1, C => D2, D => D3, Z => D_Mux); --X => clock_line
     
-    decode_digit: entity work.seven_segment_decoder(Behavioral)
-    port map(BCDin => D_Mux, Seven_Segment => seg); -- BCDin => sw(15 downto 0) -- D_Mux
+    decode_digit: ENTITY work.seven_segment_decoder(Behavioral)
+    PORT MAP(BCDin => D_Mux, Seven_Segment => seg); -- BCDin => sw(15 downto 0) -- D_Mux
     
 
 
-end Behavioral;
+END Behavioral;
