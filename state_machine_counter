@@ -98,11 +98,7 @@ begin
                 if (c_in = '1') and (count = "0000") then    -- When previous state is high (c_out), and count is zero, reset to max num
                     count <=  (modulo - "0001");             
                 elsif c_in = '1' then                        -- When previous state is high (c_out), start counting down by 1
-                    count <= count - "0001" ;                 
-                elsif increase = '1' and count < modulo then -- If up button is toggled, and count is less max reduce by 1 to offset previous count
-                    count <= count - "0001" ;       
-                elsif decrease = '1' and count > modulo then -- If down button is toggled, and count is more max increase by 1 to offset previous count
-                    count <= count + "0001" ;                                                             
+                    count <= count - "0001" ;                                                                        
                 end if; 
             end if; 
             end if ; 
