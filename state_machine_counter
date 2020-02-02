@@ -34,10 +34,12 @@ GENERIC ( width  : NATURAL := 4;
            set          : in  STD_LOGIC; 
            increase     : in  STD_LOGIC; 
            decrease     : in  STD_LOGIC;  
-           c_in         : in  STD_LOGIC;         
+           c_in         : in  STD_LOGIC;  
+           reset_in     : in  STD_LOGIC;       
            c_out        : out STD_LOGIC;
            c_up_out     : out STD_LOGIC;
            c_dwn_out    : out STD_LOGIC;
+           reset_out    : out STD_LOGIC; 
            state_driver : out UNSIGNED (3 downto 0)
          );
 END counter;
@@ -78,7 +80,9 @@ begin
                 elsif increase = '1' and count < modulo then -- If count is less than 
                     count <= count + "0001" ;    
                 elsif decrease = '1' and count > "0000" then -- If count is less than 
-                    count <= count - "0001" ;        
+                    count <= count - "0001" ;  
+                elsif (reset_in = '1') then -- If count is less than 
+                        count <= "0000";               
                 end if;     
               end if;
               end if; 
@@ -109,4 +113,5 @@ begin
     c_out     <= '1' when (c_in ='1')      and (count = "0000") else '0';   
     c_up_out  <= '1' when (increase = '1') and (count = "1001") else '0';
     c_dwn_out <= '1' when (decrease = '1') and (count = "0000") else '0';
+    reset_out <= '1' when (decrease = '1') or  (increase = '1') else '0';
 end Behavioral;
