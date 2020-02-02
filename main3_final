@@ -33,6 +33,7 @@ ENTITY main3_final is
            led0 : out STD_LOGIC;
            led1 : out STD_LOGIC;
            led2 : out STD_LOGIC;
+           led3 : out STD_LOGIC;
            an   : out STD_LOGIC_VECTOR (3 downto 0);           
            seg  : out STD_LOGIC_VECTOR (6 downto 0));
 END main3_final;
@@ -41,7 +42,7 @@ ARCHITECTURE Behavioral of main3_final is
  
 SIGNAL dir_four_digits            : STD_LOGIC; 
 SIGNAL d0, d1, d2, d3             : STD_LOGIC_VECTOR (3 downto 0);
-SIGNAL div_line                   : STD_LOGIC;
+SIGNAL div_line, deb_line         : STD_LOGIC;
 SIGNAL c01, c02, c03              : STD_LOGIC; 
 SIGNAL D_latch, res_sig           : STD_LOGIC;
 SIGNAL pos_overflow, neg_overflow : STD_LOGIC;
@@ -54,29 +55,33 @@ begin
 
     clock_divider_1sec : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 50000000) --208334 
     PORT MAP (clk_in => clk, clock_out => div_line); --reset => '0',
+
+    clock_divider_deb : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 10000000) --208334 
+    PORT MAP (clk_in => clk, clock_out => deb_line); --reset => '0',
     
     led0 <= div_line;
     led1 <= neg_overflow;
     led2 <= pos_overflow;
+    led3 <= D_latch;--led3 <= deb_line;
     
     latch : ENTITY work.latch(Behavioral)
-    PORT MAP (D => btnC, clk_in => dir_four_digits, qout => D_latch); --enable => '1',
+    PORT MAP (D => btnC, clk_in => deb_line, qout => D_latch); --enable => '1',
 
     state_0 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 10)
-    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => sw(0), increase => '0', decrease => '0', 
-              c_in => '1', std_logic_vector(state_driver) => d0, c_out => c01, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => res_sig, reset_out => OPEN); 
+    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => D_latch, increase => '0', decrease => '0', c_in => '1',
+              STD_LOGIC_VECTOR(state_driver) => d0, c_out => c01, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => res_sig, reset_out => OPEN); --set => sw(0)
     
     state_1 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 6)
-    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => sw(0), increase => '0', decrease => '0', 
-              c_in => c01, std_logic_vector(state_driver) => d1, c_out => c02, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => res_sig, reset_out => OPEN);
+    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => D_latch, increase => '0', decrease => '0', c_in => c01,
+              STD_LOGIC_VECTOR(state_driver) => d1, c_out => c02, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => res_sig, reset_out => OPEN);
               
     state_2 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 10)
-    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => sw(0), increase => btnU, decrease => btnD, 
-              c_in => c02, std_logic_vector(state_driver) => d2, c_out => c03, c_up_out => pos_overflow, c_dwn_out => neg_overflow, reset_in => '0', reset_out => res_sig); 
+    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => D_latch, increase => btnU, decrease => btnD, c_in => c02, 
+              STD_LOGIC_VECTOR(state_driver) => d2, c_out => c03, c_up_out => pos_overflow, c_dwn_out => neg_overflow, reset_in => '0', reset_out => res_sig); 
 
     state_3 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 6)
-    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => sw(0), increase => pos_overflow, decrease => neg_overflow, 
-              c_in => c03, std_logic_vector(state_driver) => d3, c_out => OPEN, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => '0', reset_out => OPEN);
+    PORT MAP (clk => clk, one_sec_clk => div_line, input => '0', set => D_latch, increase => pos_overflow, decrease => neg_overflow, c_in => c03, 
+              STD_LOGIC_VECTOR(state_driver) => d3, c_out => OPEN, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => '0', reset_out => OPEN);
 
     four_digits: ENTITY work.four_digits(Behavioral)
     PORT MAP (
