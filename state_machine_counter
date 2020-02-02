@@ -30,7 +30,6 @@ GENERIC ( width  : NATURAL := 4;
 
     PORT ( clk          : in  STD_LOGIC;
            one_sec_clk  : in  STD_LOGIC;          
-           input        : in  STD_LOGIC; 
            set          : in  STD_LOGIC; 
            increase     : in  STD_LOGIC; 
            decrease     : in  STD_LOGIC;  
@@ -52,7 +51,7 @@ SIGNAL curr_state, nx_state : state; -- Signals for current state and next state
 
 begin
 
--- begin state machine 
+    -- Begin state machine 
     state_register : process (set, clk)
     begin 
         if set = '1' then            -- If btnC is pressed stop counting
@@ -62,16 +61,11 @@ begin
         end if;   
     end process;
 
-    state_transition : process (curr_state, input, count, one_sec_clk, set)
+    state_transition : process (curr_state, count, one_sec_clk, set)
     begin
        case curr_state is        
            when  state_0 =>
-              if (input = '1') or (set = '0' and increase = '1') then
-               nx_state <= state_1;                                     -- Go to state 1 and check there as well
-               count    <= count + "0000";                              -- Stop counting whilst button is held     
-     
-              else 
-                 nx_state <= state_0; -- Set state as state_0
+              nx_state <= state_0;                                  -- Set state as state_0 (Don't need this statement)
               if RISING_EDGE (one_sec_clk) then                     -- Wait for rising clock edge 
                 if (increase = '1') and  count = (modulo - 1) then  -- If up toggled, and count equal max num, reset to 0
                     count <= "0000";                                
@@ -85,15 +79,9 @@ begin
                     count <= "0000";                             
                 end if;     
               end if;
-              end if; 
                               
            when state_1 => 
-            if (input = '1') or (set = '0' and increase = '1') then
-                nx_state <= state_0;
-                count    <= count + "0000";                   
-                   
-            else
-                nx_state <= state_1; 
+            nx_state <= state_1; 
             if RISING_EDGE (one_sec_clk) then 
                 if (c_in = '1') and (count = "0000") then    -- When previous state is high (c_out), and count is zero, reset to max num
                     count <=  (modulo - "0001");             
@@ -101,7 +89,6 @@ begin
                     count <= count - "0001" ;                                                                        
                 end if; 
             end if; 
-            end if ; 
        end case; 
     end process;  
    
@@ -110,4 +97,5 @@ begin
     c_up_out  <= '1' when (increase = '1') and (count = "1001") else '0';
     c_dwn_out <= '1' when (decrease = '1') and (count = "0000") else '0';
     reset_out <= '1' when (decrease = '1') or  (increase = '1') else '0';
+    
 end Behavioral;
