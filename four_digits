@@ -29,7 +29,6 @@ ENTITY four_digits is
          D1  : in STD_LOGIC_VECTOR (3 downto 0);
          D2  : in STD_LOGIC_VECTOR (3 downto 0);
          D3  : in STD_LOGIC_VECTOR (3 downto 0);
-         --sw  : in STD_LOGIC_VECTOR (15 downto 0);
          ck  : in  STD_LOGIC; 
          seg : out STD_LOGIC_VECTOR (6 downto 0);
          an  : out STD_LOGIC_VECTOR (3 downto 0);
