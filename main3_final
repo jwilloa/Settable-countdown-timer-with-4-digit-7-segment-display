@@ -24,7 +24,7 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY main3_final is
 
-    PORT ( sw   : in  STD_LOGIC_VECTOR (0 downto 0);
+    PORT ( --sw   : in  STD_LOGIC_VECTOR (0 downto 0);
            btnU : in  STD_LOGIC;
            btnD : in  STD_LOGIC;
            btnC : in  STD_LOGIC;
@@ -39,10 +39,10 @@ ENTITY main3_final is
 END main3_final;
 
 ARCHITECTURE Behavioral of main3_final is
- 
-SIGNAL dir_four_digits            : STD_LOGIC; 
-SIGNAL d0, d1, d2, d3             : STD_LOGIC_VECTOR (3 downto 0);
-SIGNAL div_line, deb_line         : STD_LOGIC;
+
+SIGNAL d0, d1, d2, d3             : STD_LOGIC_VECTOR (3 downto 0); -- Signal inputs for seven segment decoder 
+SIGNAL dir_four_digits            : STD_LOGIC;                     -- Signal line from 1Hz clock to four digits block 
+SIGNAL div_line, deb_line         : STD_LOGIC;                     -- div_line (output signla from one sec clock divider) & deb_line (output signal from D_Latch) 
 SIGNAL c01, c02, c03              : STD_LOGIC; 
 SIGNAL D_latch, res_sig           : STD_LOGIC;
 SIGNAL pos_overflow, neg_overflow : STD_LOGIC;
@@ -68,20 +68,61 @@ begin
     PORT MAP (D => btnC, clk_in => deb_line, qout => D_latch); --enable => '1',
 
     state_0 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 10)
-    PORT MAP (clk => clk, one_sec_clk => div_line, set => D_latch, increase => '0', decrease => '0', c_in => '1',
-              STD_LOGIC_VECTOR(state_driver) => d0, c_out => c01, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => res_sig, reset_out => OPEN); --set => sw(0)
+    PORT MAP (
+              set         =>   D_latch,               
+              clk         =>   clk,           one_sec_clk => div_line, 
+              increase    =>   '0',           decrease    => '0',
+              reset_in    =>   res_sig,       reset_out   => OPEN,               
+              c_in        =>   '1',           c_out       => c01,              
+              c_up_out    =>   OPEN,          c_dwn_out   => OPEN, 
+              STD_LOGIC_VECTOR(state_driver)              => d0               
+              );
     
     state_1 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 6)
-    PORT MAP (clk => clk, one_sec_clk => div_line, set => D_latch, increase => '0', decrease => '0', c_in => c01,
-              STD_LOGIC_VECTOR(state_driver) => d1, c_out => c02, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => res_sig, reset_out => OPEN);
+    PORT MAP (
+              set         => D_latch,               
+              clk         => clk,             one_sec_clk => div_line, 
+              increase    => '0',             decrease    => '0', 
+              reset_in    => res_sig,    
+              c_in        => c01,
+              c_out       => c02, 
+              reset_out   => OPEN,                         
+              c_up_out    => OPEN, 
+              c_dwn_out   => OPEN, 
+              STD_LOGIC_VECTOR(state_driver) => d1
+              );
               
     state_2 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 10)
-    PORT MAP (clk => clk, one_sec_clk => div_line, set => D_latch, increase => btnU, decrease => btnD, c_in => c02, 
-              STD_LOGIC_VECTOR(state_driver) => d2, c_out => c03, c_up_out => pos_overflow, c_dwn_out => neg_overflow, reset_in => '0', reset_out => res_sig); 
-
+    PORT MAP (
+              clk         => clk, 
+              one_sec_clk => div_line, 
+              set         => D_latch, 
+              increase    => btnU, 
+              decrease    => btnD, 
+              reset_in    => '0',
+              reset_out   => res_sig,
+              c_in        => c02, 
+              c_out       => c03, 
+              c_up_out    => pos_overflow, 
+              c_dwn_out   => neg_overflow, 
+              STD_LOGIC_VECTOR(state_driver) => d2
+              ); 
+                             
     state_3 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 6)
-    PORT MAP (clk => clk, one_sec_clk => div_line, set => D_latch, increase => pos_overflow, decrease => neg_overflow, c_in => c03, 
-              STD_LOGIC_VECTOR(state_driver) => d3, c_out => OPEN, c_up_out => OPEN, c_dwn_out => OPEN, reset_in => '0', reset_out => OPEN);
+    PORT MAP (
+              clk         => clk, 
+              one_sec_clk => div_line,
+              set         => D_latch, 
+              increase    => pos_overflow, 
+              decrease    => neg_overflow, 
+              reset_in    => '0', 
+              c_in        => c03,  
+              reset_out   => OPEN,              
+              c_out       => OPEN, 
+              c_up_out    => OPEN, 
+              c_dwn_out   => OPEN, 
+              STD_LOGIC_VECTOR(state_driver) => d3
+              );
 
     four_digits: ENTITY work.four_digits(Behavioral)
     PORT MAP (
