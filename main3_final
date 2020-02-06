@@ -49,40 +49,56 @@ SIGNAL pos_overflow, neg_overflow : STD_LOGIC;
 
 begin
   
-    -- Clock divider from 100MHz to 1Hz
-    clock_divider      : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 208334) --208334
-    PORT MAP (clk_in => clk, clock_out => dir_four_digits);
-
-    clock_divider_1sec : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 50000000) --208334 
-    PORT MAP (clk_in => clk, clock_out => div_line); --reset => '0',
-
-    clock_divider_deb : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 10000000) --208334 
-    PORT MAP (clk_in => clk, clock_out => deb_line); --reset => '0',
-    
     led0 <= div_line;
     led1 <= neg_overflow;
     led2 <= pos_overflow;
-    led3 <= D_latch;--led3 <= deb_line;
+    led3 <= D_latch; 
+  
+    -- Clock divider from 100MHz to 1Hz
+    clock_divider      : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 208334) --208334
+    PORT MAP (
+              clk_in    => clk, 
+              clock_out => dir_four_digits);
+
+    clock_divider_1sec : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 50000000) --208334 
+    PORT MAP (
+              clk_in    => clk, 
+              clock_out => div_line); --reset => '0',
+
+    clock_divider_deb : ENTITY work.clock_divider(Behavioral) GENERIC MAP(count_end => 10000000) --208334 
+    PORT MAP (
+              clk_in    => clk, 
+              clock_out => deb_line); --reset => '0',
     
     latch : ENTITY work.latch(Behavioral)
-    PORT MAP (D => btnC, clk_in => deb_line, qout => D_latch); --enable => '1',
+    PORT MAP (
+              D      => btnC, 
+              clk_in => deb_line, 
+              qout   => D_latch); --enable => '1',
 
     state_0 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 10)
-    PORT MAP (
-              set         =>   D_latch,               
-              clk         =>   clk,           one_sec_clk => div_line, 
-              increase    =>   '0',           decrease    => '0',
-              reset_in    =>   res_sig,       reset_out   => OPEN,               
-              c_in        =>   '1',           c_out       => c01,              
-              c_up_out    =>   OPEN,          c_dwn_out   => OPEN, 
-              STD_LOGIC_VECTOR(state_driver)              => d0               
+    PORT MAP (                            
+              clk         => clk,   
+              one_sec_clk => div_line, 
+              set         => D_latch,                
+              increase    => '0',           
+              decrease    => '0',
+              reset_in    => res_sig,                    
+              c_in        => '1',           
+              c_out       => c01,    
+              reset_out   => OPEN,           
+              c_up_out    => OPEN,
+              c_dwn_out   => OPEN, 
+              STD_LOGIC_VECTOR(state_driver) => d0               
               );
     
     state_1 : ENTITY work.counter GENERIC MAP (width => 4, modulo => 6)
-    PORT MAP (
-              set         => D_latch,               
-              clk         => clk,             one_sec_clk => div_line, 
-              increase    => '0',             decrease    => '0', 
+    PORT MAP (              
+              clk         => clk,             
+              one_sec_clk => div_line, 
+              set         => D_latch, 
+              increase    => '0',             
+              decrease    => '0', 
               reset_in    => res_sig,    
               c_in        => c01,
               c_out       => c02, 
