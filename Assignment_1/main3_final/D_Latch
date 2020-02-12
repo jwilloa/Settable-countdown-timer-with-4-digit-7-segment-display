@@ -24,7 +24,6 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY latch is
     PORT ( D      : in    STD_LOGIC;
-           --enable : in STD_LOGIC;
            clk_in : in    STD_LOGIC;
            qout   : inout STD_LOGIC
          );
@@ -33,12 +32,12 @@ END latch;
 ARCHITECTURE Behavioral of latch is
 
 begin
-    process(clk_in, D)--enable,
+    process(clk_in, D)
     begin
-        if rising_edge (clk_in) then
+        if rising_edge (clk_in) then -- Wait till rising edge
             if (D = '1') then
-                qout <= not (qout);
+                qout <= not (qout); -- Invert if '1'
             end if;
-        end if;    
-    end process;       
+        end if;
+    end process;
 END Behavioral;

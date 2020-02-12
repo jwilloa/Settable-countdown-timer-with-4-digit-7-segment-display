@@ -37,13 +37,17 @@ begin
     process (X ,A, B, C, D)
     
     begin
-    
+        -- Manually select input dependant on what value X is
         case X is
             when "00" => Z <= A;
             when "01" => Z <= B;
             when "10" => Z <= C;
-            when "11" => Z <= D;    
+            when "11" => Z <= D;
         end case;
+
+    end process;
+END Behavioral;
+
  
     end process;
 END Behavioral;

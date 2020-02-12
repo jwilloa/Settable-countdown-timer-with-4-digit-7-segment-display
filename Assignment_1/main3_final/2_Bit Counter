@@ -38,7 +38,7 @@ begin
     begin
         if (reset = '1') then
             cnt_out <= "00";
-        elsif RISING_EDGE(clock) then
+        elsif RISING_EDGE(clock) then -- Initiate count
             cnt_out <= cnt_out + "01";
         end if;
     end process;

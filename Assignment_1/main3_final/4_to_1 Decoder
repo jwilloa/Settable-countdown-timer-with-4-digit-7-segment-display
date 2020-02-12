@@ -24,8 +24,8 @@ USE IEEE.STD_LOGIC_1164.ALL;
 
 ENTITY seven_segment_decoder is
     PORT ( 
-           BCDin         : in STD_LOGIC_VECTOR  (3 downto 0); --BCDin : in STD_LOGIC_VECTOR (3 downto 0);
-           Seven_Segment : out STD_LOGIC_VECTOR (6 downto 0));
+           BCDin         : in  STD_LOGIC_VECTOR(3 downto 0);
+           Seven_Segment : out STD_LOGIC_VECTOR(6 downto 0));
 END seven_segment_decoder;
 
 ARCHITECTURE Behavioral of seven_segment_decoder is
@@ -33,9 +33,10 @@ ARCHITECTURE Behavioral of seven_segment_decoder is
 begin
 
     process(BCDin)
-    
+
     begin
-     
+
+    -- Convert number to segment display dependant on input
     case BCDin is
         when "0000" =>
         Seven_Segment <= "1000000"; ---0
@@ -60,7 +61,7 @@ begin
         when others =>
         Seven_Segment <= "1000000"; ---null
     end case;
-     
+
     end process;
- 
+
 END Behavioral;

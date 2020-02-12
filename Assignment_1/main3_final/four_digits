@@ -39,27 +39,28 @@ END four_digits;
 ARCHITECTURE Behavioral of four_digits is
 
 SIGNAL clock_line : STD_LOGIC_VECTOR(1 downto 0);
-SIGNAL D_Mux      : STD_LOGIC_VECTOR(3 downto 0); --signal D_Mux : STD_LOGIC_VECTOR(3 downto 0);
+SIGNAL D_Mux      : STD_LOGIC_VECTOR(3 downto 0);
 
 begin
 
+    -- Show decimal point to break the minutes and seconds digits
     with clock_line select
     dp <=   '0' when "10",
-            '1' when others; 
+            '1' when others;
 
     -- Instantiating two_bit_Counter, anode_decoder, multiplexer & BCD_decoder
     two_bit_counter: ENTITY work.two_bit_counter(Behavioral)
-    PORT MAP(clock => ck, reset => '0', cnt_out => clock_line); 
-    
+    PORT MAP(clock => ck, reset => '0', cnt_out => clock_line);
+
     anode_decoder: ENTITY work.display_anode_select(Behavioral)
     PORT MAP(counter => clock_line, anode => an);
-    
+
     multiplexer: ENTITY work.four_to_one_multiplexer(Behavioral)
     PORT MAP(X => clock_line, A => D0, B => D1, C => D2, D => D3, Z => D_Mux); --X => clock_line
-    
+
     decode_digit: ENTITY work.seven_segment_decoder(Behavioral)
     PORT MAP(BCDin => D_Mux, Seven_Segment => seg); -- BCDin => sw(15 downto 0) -- D_Mux
-    
+
 
 
 END Behavioral;

@@ -34,6 +34,7 @@ ARCHITECTURE Behavioral of display_anode_select is
 
 begin
 
+    -- Manually decode digits to specified anode outputs
     with counter select
       anode <= "1110" when "00",
                "1101" when "01",

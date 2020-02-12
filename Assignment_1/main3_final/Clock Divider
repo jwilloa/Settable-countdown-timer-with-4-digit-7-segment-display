@@ -42,7 +42,7 @@ begin
     begin
         if RISING_EDGE(clk_in) then -- Wait till rising edge
             count <= count + 1;     -- Increment counter by 1
-            if (count = count_end) then   -- Once count = 208334 then invert the signal     
+            if (count = count_end) then   -- Once count = count_end then invert the signal
                 tmp <= NOT tmp;
                 count <= 0;  -- And set count back to 0
             end if;
