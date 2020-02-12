@@ -1,0 +1,239 @@
+commit 1c04729908db62bbe8d88b5282813a0d1a24e7cb
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Thu Feb 6 18:08:27 2020 +0000
+
+    New main3 dir
+
+commit cd5f8b1f5a4b55309447e604e1993185721357eb
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Thu Feb 6 16:20:02 2020 +0000
+
+    Changed the format, so now it's more aesthetically pleasing
+
+commit e069a5c81e689a6bfbc9a373d2017ddffc7e8092
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Tue Feb 4 20:33:22 2020 +0000
+
+    Update 2_Bit Counter
+
+commit 2af9cbb7cad4f2628123fa08dfd2a97876616992
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Tue Feb 4 20:33:10 2020 +0000
+
+    Update four_digits
+
+commit e982c5bfbb1eadb078ac6965fd60b239f7c5ab94
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Tue Feb 4 20:32:54 2020 +0000
+
+    Update state_machine_counter
+
+commit 339ef37dcd4e2713a7d2c01345ca349dfe147780
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Tue Feb 4 20:32:26 2020 +0000
+
+    Update D_Latch
+
+commit be2d4dd9527c1db9ec2e7659e2ae4dfbf2c4ae11
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Tue Feb 4 20:31:38 2020 +0000
+
+    Update Clock Divider
+
+commit a1a908d0c14b13843a86dbc11b261463ca2f2520
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Tue Feb 4 20:31:12 2020 +0000
+
+    Changed format
+
+commit 493233beb613ffa5eed9983f7bc4bb0d6934439c
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 18:54:17 2020 +0000
+
+    Removed 'input' input as it's not needed
+
+commit 514ef50769709445d85f97c3b47cea0835245aaa
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 18:53:12 2020 +0000
+
+    Removed redundant input and code
+
+commit 181d4061991970bc41184dd8fe13aba3e995646e
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 14:52:55 2020 +0000
+
+    Removed redundant if statements in second state
+
+commit 1836f47ce2e754b89f8c03e5740b6c7c8ce198cf
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 14:34:47 2020 +0000
+
+    Tweaked the if statement
+
+commit 291b3cbdb659e4aecd7747d9369b9d0cb2eb2b18
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 14:33:55 2020 +0000
+
+    Just a minor tweak of input values
+
+commit 2a2cbdc6785561159e5faa2d60b3bfcd59ae7928
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 14:11:21 2020 +0000
+
+    Update master.xdc
+
+commit 63491fb75eec770c5c68ea061e17fbcdbea17779
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 12:49:35 2020 +0000
+
+    Update main3_final
+
+commit b7b91fdc37b40e5f76a8c0e0935e33789c1161e3
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 12:49:11 2020 +0000
+
+    Update D_Latch
+
+commit 87ff06fc150b4c401ef72ab6ef95d103f5baf72a
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 12:48:37 2020 +0000
+
+    Update state_machine_counter
+
+commit f263377aabfd9a057125b683cd2437c981d644a0
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 08:41:33 2020 +0000
+
+    Added reset for input and output from btnU and btnD toggle
+
+commit 51bcfff73db1243afe90e13d46c45c686606c111
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sun Feb 2 08:39:55 2020 +0000
+
+    Put in one input and output for reset of seconds
+
+commit d1d245f2c1cca56f081556bf8d8a83c9744b74b8
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:53:37 2020 +0000
+
+    Update 4_to_1 Decoder and cleaned up code
+
+commit fc6515486618eabed4e3b945a72ec3af3a730353
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:53:12 2020 +0000
+
+    Update 4_to_1 Mux and cleaned up code
+
+commit 0afb38edde61cc66a8863b5df69982eeec1f79d9
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:52:37 2020 +0000
+
+    Made new file for anode decoder for segment selection
+
+commit 1dbb9598b7131ecbd30809af07d42f8399f935c9
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:51:25 2020 +0000
+
+    Update 2_Bit Counter and cleaned up code
+
+commit 59cd399fa65db26e618aa1afe19fb7ce9785adcd
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:50:53 2020 +0000
+
+    Update four_digits and cleaned up code
+
+commit 8a73b39e34b0735f871aeaaa1a49d349922b4e90
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:50:19 2020 +0000
+
+    Update 4_bit_counter to state machine counter, cleaned up code as well and added new inputs and outputs
+
+commit cffb7377b4e73514110717790238fa3a06a456a1
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:48:45 2020 +0000
+
+    Component to hold the btnC high when pressed
+
+commit d0ef6e548a23d68e24dbee9e45ecd74eca0fb946
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:48:07 2020 +0000
+
+    Update Clock Divider and cleaned up code
+
+commit 3f9a47d2707e27b88745eb8a39c84cfb5c581648
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:47:40 2020 +0000
+
+    Update main3_final, cleaned up code
+
+commit bb270e7cc9a992ad955831c89f450306207090b8
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Feb 1 23:47:10 2020 +0000
+
+    Update master.xdc
+
+commit 7b380983cfd4bc1313c8a1fdfe9a92f8672dd0d8
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Wed Jan 29 19:07:33 2020 +0000
+
+    Updated with new connections
+
+commit 7aa6a0bcd64410c53bb5f9a22db5f2f021f9e050
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Wed Jan 29 19:05:09 2020 +0000
+
+    Added generic function in to make the clock_divider more dynamic. And more malleable when creating the 1 sec divider
+
+commit 5c1e5841a55d5749731503091b5113922132f4d4
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Wed Jan 29 19:03:11 2020 +0000
+
+    Updated main3_final with four counter (that are still working progress), but this is the highest level design that controls the four_digits file and all its components as well as the counters
+
+commit d5599a3b3448f74efc1f90f7a8e5bfed401121e1
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Wed Jan 29 19:01:18 2020 +0000
+
+    Top level hierarchy to control two_bit counter, anode decoder, multiplexer, and seven segment decoder
+
+commit d211f0f838f584220ef1a099fd6c2844c6de799b
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Wed Jan 29 18:59:27 2020 +0000
+
+    Four bit counter to start the clock down counter
+
+commit 2f90615a1657c350e8cbc765e5929d14f536851e
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Jan 25 18:04:26 2020 +0000
+
+    Master constraints file
+
+commit 74970c42356888cecc2c627d1d5142f47d15488c
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Jan 25 18:03:53 2020 +0000
+
+    Clock divider to bring 100MHz from Basys3 down to 1Hz
+
+commit ccc0e3c1dd971524cdd062b0d591acaadcb9e1e6
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Jan 25 18:03:14 2020 +0000
+
+    Counter driven by clock divider, used to implement multiplexer selection
+
+commit 0945128a7aa249e10669d9504cb20f198d522887
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Jan 25 18:02:29 2020 +0000
+
+    Implementation of multiplexer with selector options for 2_Bit counter input
+
+commit b75f2f89c7a2f5caaf3ab74df6466afc799d4791
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Jan 25 18:01:11 2020 +0000
+
+    Decoder for 9 BCD
+
+commit 55c382f9a51c65a931d52d15a73513640d4e7b57
+Author: Willock, Javan <jwilloa@essex.ac.uk>
+Date:   Sat Jan 25 17:59:59 2020 +0000
+
+    Added all the components in for 4_to_1 _Decoders, MUX_ DP_ and anode selector
