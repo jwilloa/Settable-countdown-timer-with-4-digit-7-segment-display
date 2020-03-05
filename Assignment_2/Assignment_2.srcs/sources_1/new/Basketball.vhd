@@ -18,60 +18,41 @@
 ---- 
 ------------------------------------------------------------------------------------
 
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
---library IEEE;
---use IEEE.STD_LOGIC_1164.ALL;
+entity disc is
+    generic (
+            CX    : NATURAL                       := 100;
+            CY    : NATURAL                       := 100;
+            RP    : NATURAL                       := 20;
+            RED   : STD_LOGIC_VECTOR (3 downto 0) := "1111";
+            BLUE  : STD_LOGIC_VECTOR (3 downto 0) := "0000";
+            GREEN : STD_LOGIC_VECTOR (3 downto 0) := "0000");
+port (
+    PIXEL_CK : in  STD_LOGIC;
+    X, Y     : in  UNSIGNED         (10 downto 0);
+    R,G,B    : out STD_LOGIC_VECTOR (3 downto 0);
+    MASK     : out STD_LOGIC );
+end disc;
 
----- Uncomment the following library declaration if using
----- arithmetic functions with Signed or Unsigned values
-----use IEEE.NUMERIC_STD.ALL;
+architecture Behavioral of disc is
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx leaf cells in this code.
-----library UNISIM;
-----use UNISIM.VComponents.all;
+signal DX, DY   : UNSIGNED (X'range);
+signal DX2, DY2 : UNSIGNED ((2*X'high+1) downto 0);
+signal FLAG     : STD_LOGIC;
+constant R2     : UNSIGNED (DX2'range) := to_unsigned(RP * RP, DX2'length);
 
---entity Basketball is
-----  Port ( );
---end Basketball;
+begin
+    DX <= X - CX when X > CX else CX - X;
+    DY <= Y - CY when Y > CY else CY - Y;
+    DX2 <= DX * DX;
+    DY2 <= DY * DY;
+    FLAG <= '1' when (DX2 + DY2 < R2) else '0';
 
---architecture Behavioral of Basketball is
-
---begin
-
-
---end Behavioral;
-
-
---entity Basketball is
---generic (
---            CX     : NATURAL := 320;
---            CY     : NATURAL := 240;
---            R      : NATURAL := 100;
---            COLOUR : STD_LOGIC_VECTOR(11 downto 0) := "001111000011" );
---port (
---            PIXEL_CK : in STD_LOGIC;
---            X, Y: in UNSIGNED (10 downto 0);
---            RGB : out STD_LOGIC_VECTOR(11 downto 0);
---            MASK : out STD_LOGIC );
---end Basketball;
-
---architecture Behavioral of Basketball is
-
---SIGNAL DX, DY   : UNSIGNED (X'range);
---SIGNAL DX2,
--- DY2 : UNSIGNED ((2*X'high+1) downto 0);
---SIGNAL FLAG     : STD_LOGIC;
---CONSTANT R2     : UNSIGNED(DX2'range)
--- := TO_UNSIGNED(R * R, DX2'length);
-
---begin
---    DX <= X - CX when X > CX else CX - X;
---    DY <= Y - CY when Y > CY else CY - Y;
---    DX2 <= DX * DX;
---    DY2 <= DY * DY;
---    FLAG <= '1' when (DX2 + DY2 < R2) else '0';
---    RGB  <= COLOUR when FLAG = '1'
---    else (OTHERS => '0');
---        MASK <= FLAG;
---end Behavioral;
+    R <= RED   when FLAG = '1' else (others => '0');
+    B <= BLUE  when FLAG = '1' else (others => '0');
+    G <= GREEN when FLAG = '1' else (others => '0');
+    MASK <= FLAG;
+end Behavioral;

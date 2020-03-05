@@ -22,22 +22,21 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity Basketball_Hoop is
---  Port ( );
+  Port ( 
+        X, Y : in UNSIGNED (10 downto 0);
+        RGB : out STD_LOGIC_VECTOR (11 downto 0);
+        MASK : out STD_LOGIC
+);
 end Basketball_Hoop;
 
 architecture Behavioral of Basketball_Hoop is
 
 begin
 
+    FLAG <= '1' when (X >= 300) and (X < 370)
+                and  (Y >= 300) and (Y < 370) else '0';
+    RGB <= "000011110000" when FLAG = '1' else (OTHERS => '0');
+    MASK <= FLAG;
 
 end Behavioral;

@@ -3,10 +3,10 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
-<application name="pa" timeStamp="Fri Feb 21 00:30:21 2020">
+<application name="pa" timeStamp="Thu Mar 05 20:41:09 2020">
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="fdf539732c4d490e89a0c295b2b4fae0" type="ProjectID"/>
-<property name="ProjectIteration" value="61" type="ProjectIteration"/>
+<property name="ProjectIteration" value="137" type="ProjectIteration"/>
 </section>
 <section name="PlanAhead Usage" visible="true">
 <item name="Project Data">
@@ -18,56 +18,34 @@ This means code written to parse this file will need to be revisited each subseq
 </item>
 <item name="Java Command Handlers">
 <property name="AddSources" value="9" type="JavaHandler"/>
-<property name="AutoConnectTarget" value="9" type="JavaHandler"/>
+<property name="AutoConnectTarget" value="14" type="JavaHandler"/>
 <property name="EditPaste" value="7" type="JavaHandler"/>
-<property name="EditUndo" value="48" type="JavaHandler"/>
-<property name="LaunchProgramFpga" value="38" type="JavaHandler"/>
+<property name="EditUndo" value="49" type="JavaHandler"/>
+<property name="LaunchOpenTarget" value="1" type="JavaHandler"/>
+<property name="LaunchProgramFpga" value="99" type="JavaHandler"/>
 <property name="NewProject" value="1" type="JavaHandler"/>
-<property name="OpenHardwareManager" value="51" type="JavaHandler"/>
-<property name="OpenRecentTarget" value="9" type="JavaHandler"/>
-<property name="ProgramDevice" value="39" type="JavaHandler"/>
-<property name="RunBitgen" value="61" type="JavaHandler"/>
-<property name="RunImplementation" value="2" type="JavaHandler"/>
+<property name="OpenHardwareManager" value="118" type="JavaHandler"/>
+<property name="OpenProject" value="1" type="JavaHandler"/>
+<property name="OpenRecentTarget" value="17" type="JavaHandler"/>
+<property name="ProgramDevice" value="105" type="JavaHandler"/>
+<property name="ProjectSettingsCmdHandler" value="1" type="JavaHandler"/>
+<property name="RunBitgen" value="137" type="JavaHandler"/>
+<property name="RunImplementation" value="4" type="JavaHandler"/>
 <property name="RunSchematic" value="2" type="JavaHandler"/>
-<property name="RunSynthesis" value="15" type="JavaHandler"/>
-<property name="SaveFileProxyHandler" value="1" type="JavaHandler"/>
-<property name="ShowView" value="32" type="JavaHandler"/>
-<property name="ToggleViewNavigator" value="4" type="JavaHandler"/>
+<property name="RunSynthesis" value="18" type="JavaHandler"/>
+<property name="SaveFileProxyHandler" value="4" type="JavaHandler"/>
+<property name="ShowView" value="54" type="JavaHandler"/>
+<property name="ToggleViewNavigator" value="9" type="JavaHandler"/>
 <property name="ViewTaskImplementation" value="1" type="JavaHandler"/>
-<property name="ViewTaskProjectManager" value="7" type="JavaHandler"/>
+<property name="ViewTaskProjectManager" value="18" type="JavaHandler"/>
 </item>
 <item name="Gui Resources Info">
-<property name="Basketball_Video_Game.vhd, 111, 230" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 13, 365" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 158, 177" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 190, 450" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 197, 487" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 201, 438" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 203, 466" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 204, 533" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 205, 520" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 356, 220" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 474, 214" value="1" type="GuiResourceData"/>
-<property name="Basketball_Video_Game.vhd, 92, 264" value="1" type="GuiResourceData"/>
-<property name="PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, [, Analysis Results, sim_1, [HDL 9-806] Syntax error near objectGreen. [M:/2019-20/CE339 - High Level Digital Design/CE339 - Repo/Assignment_2/Assignment_2.srcs/sources_1/new/Basketball_Video_Game.vhd:100]. ], 4, false" value="3" type="GuiResourceData"/>
-<property name="PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, [, Implementation, Design Initialization, [Common 17-55] 'set_property' expects at least one object. [M:/2019-20/CE339 - High Level Digital Design/CE339 - Repo/Assignment_2/Assignment_2.srcs/constrs_1/new/master.xdc:12]. ], 9, true" value="1" type="GuiResourceData"/>
-<property name="PAResourceItoN.MsgTreePanel_MESSAGE_VIEW_TREE, [, Synthesis, [Common 17-55] 'set_property' expects at least one object. [M:/2019-20/CE339 - High Level Digital Design/CE339 - Repo/Assignment_2/Assignment_2.srcs/constrs_1/new/master.xdc:12]. ], 6, true" value="1" type="GuiResourceData"/>
-<property name="RDIResource.BaseDialog_OK, OK" value="1" type="GuiResourceData"/>
-<property name="RDIResource.HCodeEditor_SEARCH_TEXT_COMBO_BOX, sw, true" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 260, 164" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 301, 185, false, false, true, false, false" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 385, 368" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 39, 131" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 417, 437" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 419, 366" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 421, 330" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 422, 382" value="1" type="GuiResourceData"/>
-<property name="master.xdc, 620, 143" value="1" type="GuiResourceData"/>
+<property name="RDIResource.BaseDialog_CANCEL, Cancel" value="1" type="GuiResourceData"/>
 </item>
 <item name="Other">
-<property name="GuiMode" value="5" type="GuiMode"/>
+<property name="GuiMode" value="2" type="GuiMode"/>
 <property name="BatchMode" value="0" type="BatchMode"/>
-<property name="TclMode" value="2" type="TclMode"/>
+<property name="TclMode" value="1" type="TclMode"/>
 </item>
 </section>
 </application>
